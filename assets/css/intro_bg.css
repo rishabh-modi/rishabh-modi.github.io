@@ -1,0 +1,46 @@
+/* -------------------------------------------------
+   intro-bg.css
+   Matrix GIF background ONLY for #intro section
+   ------------------------------------------------- */
+
+#intro {
+    /* Matrix GIF background */
+    background-image: url('https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;   /* Optional: parallax effect */
+    position: relative;
+}
+
+/* Dark overlay – makes white text readable */
+#intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);   /* 65% dark – adjust as needed */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Content stays on top */
+#intro .inner {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+}
+
+/* Optional: extra text glow for Matrix vibe */
+#intro h1,
+#intro p {
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.6), 
+                 0 1px 4px rgba(0, 0, 0, 0.8);
+    color: #0f0;   /* Matrix green text */
+}
+
+/* Optional: make profile image pop */
+#intro .circular--square {
+    border: 3px solid #0f0;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}

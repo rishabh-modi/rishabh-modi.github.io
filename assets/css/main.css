@@ -3241,31 +3241,31 @@ input, select, textarea {
 			}
 
 		.wrapper.alt {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.style1 {
-			background-color: #505050;
+			background-color: #161616;
 		}
 
 		.wrapper.style1-alt {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.style2 {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.style2-alt {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.style3 {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.style3-alt {
-			background-color: #424242;
+			background-color: #161616;
 		}
 
 		.wrapper.fullscreen {
@@ -3527,20 +3527,40 @@ input, select, textarea {
 
 /* Sidebar */
 
-	#sidebar {
-		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #312450;
-		cursor: default;
-		height: 100vh;
-		left: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
-		position: fixed;
-		text-align: right;
-		top: 0;
-		width: 18em;
-		z-index: 10000;
-	}
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 18em;
+  height: 100vh;
+  padding: 2.5em 2.5em 0.5em 2.5em;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  text-align: right;
+  z-index: 10000;
+
+  /* dark translucent layer above the blurred GIF */
+  background: rgba(0,0,0,0.45);
+}
+
+#sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* GIF layer that sits behind the content and is blurred */
+#sidebar::before{
+  content: "";
+  position: absolute;
+  inset: 0;                      /* top/right/bottom/left: 0 */
+  background: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGpicnM1czZrcW5keGx3YzRqdDFieGl3ejgxY3lsM3o4cXMzc3ZwcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WoD6JZnwap6s8/giphy.gif') no-repeat center center;
+  background-size: cover;
+  filter: blur(8px);             /* blur the GIF */
+  transform: scale(1.05);        /* avoid visible edges after blur */
+  z-index: -1;                   /* behind sidebar content */
+  pointer-events: none;
+}
+
+
 
 		#sidebar > .inner {
 			display: -moz-flex;
@@ -3924,4 +3944,54 @@ input, select, textarea {
 			width: 500;
 			height: 500;
 		  }
-		
+		/* -------------------------------------------------
+   intro-bg.css
+   Dedicated background-GIF for #intro section
+   ------------------------------------------------- */
+
+/* 1. Apply the GIF to the whole section */
+#intro {
+    /* Direct link to the GIPHY image (ends in .gif) */
+    background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGpicnM1czZrcW5keGx3YzRqdDFieGl3ejgxY3lsM3o4cXMzc3ZwcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WoD6JZnwap6s8/giphy.gif');
+
+    background-size: cover;          /* fill the whole area */
+    background-position: center;     /* keep it centered */
+    background-repeat: no-repeat;    /* no tiling */
+    position: relative;              /* needed for the overlay */
+}
+
+/* 2. Dark overlay – makes text readable on any GIF */
+#intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;                        /* shorthand for top/right/bottom/left = 0 */
+    background: rgba(0, 0, 0, 0.55);  /* 55 % black – tweak opacity if you want */
+    z-index: 1;                      /* sits between background & content */
+}
+
+/* 3. Keep the inner content above the overlay */
+#intro .inner {
+    position: relative;
+    z-index: 2;                      /* above the ::before overlay */
+    color: #fff;                     /* white text */
+    text-align: center;
+}
+
+/* 4. Optional – subtle shadow for extra contrast */
+#intro h1,
+#intro p {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+#intro .actions {
+  text-align: center;
+}
+#intro .actions li {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+
+/* -------------------------------------------------
+   END OF FILE
+   ------------------------------------------------- */
